@@ -11,6 +11,7 @@ use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use Illuminate\Support\Stringable;
 use Symfony\Component\Panther\Client;
 use Symfony\Component\Panther\DomCrawler\Crawler;
 
@@ -77,7 +78,11 @@ class ScrapeBinanceAnnouncementsCommand extends Command
                             'announcement_id' => (string) $announcementId,
                             'title' => (string) $title,
                             'date' => $date,
-                            'url' => 'https://www.binance.com' . $url,
+                            'url' => (string) Str::of($url)->when(
+                                Str::startsWith($url, 'https://www.binance.com'),
+                                fn (Stringable $url) => $url,
+                                fn (Stringable $url) => $url->prepend('https://www.binance.com')
+                            ),
                         ]);
                     });
 
