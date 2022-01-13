@@ -31,6 +31,6 @@ class IntroduceBot extends Notification
     {
         return TelegramMessage::create()
             ->to($notifiable)
-            ->content("Hello I am CryptoCell bot.\nI am here to give you the latest crypto alerts.\n\nCommands:\n\n/sub_binance - Subscribe for latest Binance crypto alerts.");
+            ->content("Hello I am CryptoCell bot.\nI am here to give you the latest crypto alerts.\n\nCommands:\n\n/sub\_binance - Subscribe for latest Binance crypto alerts.");
     }
 }
